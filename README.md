@@ -9,24 +9,24 @@
 
 ## Installation:
 
-#### Environment:
+### Environment
 1. Linux
 2. Python 3.7 
 3. Pytorch 1.8
 4. NVIDIA GPU + CUDA 10.2 
 
-#### Prepare Data
+### Prepare Data
 데이터 셋은 [LPCVC 2023](https://lpcv.ai/competitions/2023) 에서 제공한 데이터셋을 사용하였습니다.
 
 
-#### Modify Codes
+### Modify Codes
 Modify `*.yml` files in `./config`
 * `data:path`: path to dataset 
 * `training:batch_size`: batch_size``
 * `training:train_augmentations:rcrop`: input size for training
 ``
 
-#### Train
+### Train
 
 ```bash
 train
@@ -41,7 +41,7 @@ python3.6 -m zipapp  solution  -p='/usr/bin/env python3.6'
 ```
 
 
-#### test
+### test
 test는 [LPCVC evaluation](https://github.com/lpcvai/23LPCVC_Segmentation_Track-Sample_Solution)을 통해 진행 하였습니다.
 
 ## reference
