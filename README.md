@@ -22,9 +22,9 @@
 ### Modify Codes
 Modify `*.yml` files in `./config`
 * `data:path`: path to dataset 
-* `training:batch_size`: batch_size``
+* `training:batch_size`: batch_size
 * `training:train_augmentations:rcrop`: input size for training
-``
+
 
 ### Train
 
@@ -45,7 +45,6 @@ python3.6 -m zipapp  solution  -p='/usr/bin/env python3.6'
 test는 [LPCVC evaluation](https://github.com/lpcvai/23LPCVC_Segmentation_Track-Sample_Solution)을 통해 진행 하였습니다.
 
 ## reference
-이 프로젝트에서 참고한 Git 관련 정보와 기타 유용한 리소스는 다음과 같습니다:
 1. [23LPCV](https://lpcv.ai/competitions/2023) 2023 Low PowerComputer Vision Challenge
 2. [23LPCV evaluation](https://github.com/lpcvai/23LPCVC_Segmentation_Track-Sample_Solution)  평가 방법
 3. [structure_knowledge_distillation](https://github.com/irfanICMLL/structure_knowledge_distillation) sementic segmentation knowledge distillation 참조.
