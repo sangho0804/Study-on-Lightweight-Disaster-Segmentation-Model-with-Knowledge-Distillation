@@ -1,0 +1,102 @@
+# lambda pa / lambda_pi / batch /  
+#
+student_model:
+    student: fanet_student
+    backbone: resnet18
+
+teacher_model:
+    teacher: fanet_teacher
+    backbone: resnet101
+
+discriminator:
+    Discriminator_name: Discriminator
+data:
+    dataset: lpcvc 
+    train_split: train  
+    val_split: val
+    img_rows: 512
+    img_cols: 512
+    path: /home/sihyeong3/murasaki/KCC/dataset/LPCVC
+
+training:
+    n_workers: 2
+    train_iters: 40000
+    batch_size: 128
+    val_interval: 500
+    print_interval: 50
+
+    # ho loss with hyperparameter & not use
+    lambda_d : 0.1
+    lambda_gp : 5.0
+
+    # pa loss, pi loss with hyperparameter
+    lambda_pa : 0.1
+    lambda_pi : 10.0
+    
+    st_loss:
+        name: OhemCELoss2D 
+        thresh: 0.7
+        ignore_index: 250
+    pi_loss: 
+        name: CriterionPixelWise 
+    pa_loss: 
+        name: CriterionPairWiseforWholeFeatAfterPool 
+    ho_loss:
+        name: CriterionAdvForG 
+    d_loss:
+        name: CriterionAdv
+    d_wgp_loss:
+        name: CriterionAdditionalGP
+        lambda_gp : 10.0
+
+    # teacher model pretrained 
+    student_resume:
+    teacher_resume: /home/sihyeong3/murasaki/KCC/runs/FA_Res101/2023092601/fanet_lpcvc_best_model.pth
+
+    s_optimizer:
+        name: adaoptimizer
+        momentum: 0.9
+        lr_multi: 4
+        bn_wd_disable: False
+        wd: 5.0e-4
+        lr0: 1.0e-3
+        max_iter: 40000
+        power: 0.9
+        warmup_steps: 1000
+        warmup_start_lr: 1.0e-5
+
+    d_optimizer:
+        name: adaoptimizer
+        momentum: 0.9
+        lr_multi: 4
+        bn_wd_disable: False
+        wd: 5.0e-4
+        lr0: 4.0e-5
+        max_iter: 40000
+        power: 0.9
+        warmup_steps: 1000
+        warmup_start_lr: 1.0e-5
+
+    train_augmentations:
+        rotate: 5
+        brightness: 0.5
+        contrast: 0.5
+        saturation: 0.5
+        scale: [512,512]
+        rscale: [0.5,2]
+        hflip: 0.5
+        rcrop: [384,384]
+        norm: 255.0
+        cnorm : [[0.46074432, 0.45581704, 0.4192581],[0.18550818, 0.17077453, 0.1769904]]
+    visdom: False
+
+validating:
+    densecrf: False
+    resume:
+    n_workers: 1
+    batch_size: 1
+    outpath: 
+    val_augmentations:
+        scale: [512,512]
+        norm: 255.0
+        cnorm : [[0.46074432, 0.45581704, 0.4192581],[0.18550818, 0.17077453, 0.1769904]]
